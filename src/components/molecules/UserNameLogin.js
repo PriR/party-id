@@ -20,7 +20,7 @@ const UserNameLogin = props => {
       style={{flex: 1}}
       behavior="padding"
       keyboardVerticalOffset={100}>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <ContainerOutter>
             <HeaderNotLogged text={props.highlightedText} />
