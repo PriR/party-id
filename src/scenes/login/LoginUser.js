@@ -15,7 +15,7 @@ const LoginUser = () => {
     // setStringValue('username', username).then(itemValue =>
     //   Alert.alert(itemValue),
     // );
-    navigate('LoginPassword');
+    navigate('PaymentRegister');
   };
 
   const handleChangeInput = value => {

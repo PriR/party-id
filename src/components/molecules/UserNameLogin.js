@@ -7,12 +7,9 @@ import {
   ScrollView,
 } from 'react-native';
 import styled from 'styled-components/native';
-import OrangeTextNav from '../atoms/OrangeTextNav';
-import ButtonCenter from '../atoms/ButtonCenter';
-import InputLabelBold from '../atoms/Label';
-import HeaderNotLogged from '../../components/atoms/HeaderNotLogged';
-import InputText from '../atoms/InputText';
-import Switch from '../molecules/Switch';
+import {OrangeTextNav, ButtonCenter, Label, InputText} from '../atoms';
+import HeaderNotLogged from './HeaderNotLogged';
+import Switch from './Switch';
 
 const UserNameLogin = props => {
   return (
@@ -20,67 +17,19 @@ const UserNameLogin = props => {
       style={{flex: 1}}
       behavior="padding"
       keyboardVerticalOffset={100}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        contentContainerStyle={{flexGrow: 1}}
+        showsVerticalScrollIndicator>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <ContainerOutter>
             <HeaderNotLogged text={props.highlightedText} />
             <Container>
-              <InputLabelBold text={props.inputLabelBoldName} />
+              <Label text={props.inputLabelBoldName} />
               <InputText
                 value={props.username}
                 onInputChange={props.onInputChange}
               />
-
               <Switch text={props.textSwitch} />
-
-              <BottomContainter>
-                <ButtonCenter
-                  name={props.primaryButtonName}
-                  onPress={() => props.onPress}
-                />
-                <OrangeTextNav text={props.orangeTextLink} />
-              </BottomContainter>
-
-              <InputLabelBold text={props.inputLabelBoldName} />
-              <InputText
-                value={props.username}
-                onInputChange={props.onInputChange}
-              />
-
-              <Switch text={props.textSwitch} />
-
-              <BottomContainter>
-                <ButtonCenter
-                  name={props.primaryButtonName}
-                  onPress={() => props.onPress}
-                />
-                <OrangeTextNav text={props.orangeTextLink} />
-              </BottomContainter>
-
-              <InputLabelBold text={props.inputLabelBoldName} />
-              <InputText
-                value={props.username}
-                onInputChange={props.onInputChange}
-              />
-
-              <Switch text={props.textSwitch} />
-
-              <BottomContainter>
-                <ButtonCenter
-                  name={props.primaryButtonName}
-                  onPress={() => props.onPress}
-                />
-                <OrangeTextNav text={props.orangeTextLink} />
-              </BottomContainter>
-
-              <InputLabelBold text={props.inputLabelBoldName} />
-              <InputText
-                value={props.username}
-                onInputChange={props.onInputChange}
-              />
-
-              <Switch text={props.textSwitch} />
-
               <BottomContainter>
                 <ButtonCenter
                   name={props.primaryButtonName}
@@ -91,19 +40,23 @@ const UserNameLogin = props => {
             </Container>
           </ContainerOutter>
         </TouchableWithoutFeedback>
+        <SafeAreaView />
       </ScrollView>
-      <SafeAreaView />
     </KeyboardAvoidingView>
   );
 };
 
-const ContainerOutter = styled.View``;
+const ContainerOutter = styled.View`
+  flex: 1;
+  justify-content: flex-end;
+`;
 
 const BottomContainter = styled.View`
   padding-bottom: 10px;
 `;
 
 const Container = styled.View`
+  flex: 1;
   justify-content: flex-end;
   font-size: 20px;
   margin-left: 20px;
