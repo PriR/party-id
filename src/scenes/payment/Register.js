@@ -4,21 +4,26 @@ import {SafeAreaView, StyleSheet, TextInput} from 'react-native';
 import Lottie from 'lottie-react-native';
 
 import card from '../../assets/lottie/card.json';
-import {white} from '../../utils/colors';
 
 const Register = () => {
   const handleOnChangeText = (id, value) => {
     switch (id) {
       case 'firstBlock': {
-        console.log('firstBlock');
+        if (value.length === 4) {
+          refCardNumber2.current.focus();
+        }
         break;
       }
       case 'secondBlock': {
-        console.log('secondBlock');
+        if (value.length === 4) {
+          refCardNumber3.current.focus();
+        }
         break;
       }
       case 'thirdBlock': {
-        console.log('thirdBlock');
+        if (value.length === 4) {
+          refCardNumber4.current.focus();
+        }
         break;
       }
       case 'fourthBlock': {
@@ -27,6 +32,11 @@ const Register = () => {
       }
     }
   };
+
+  const refCardNumber1 = React.useRef();
+  const refCardNumber2 = React.useRef();
+  const refCardNumber3 = React.useRef();
+  const refCardNumber4 = React.useRef();
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -44,6 +54,7 @@ const Register = () => {
             <Label>Número do cartão</Label>
             <Row>
               <TextInput
+                ref={refCardNumber1}
                 style={styles.inputNumbersCard}
                 placeholder="1234"
                 placeholderTextColor="#B3B6B7"
@@ -53,6 +64,7 @@ const Register = () => {
               />
               <Space />
               <TextInput
+                ref={refCardNumber2}
                 style={styles.inputNumbersCard}
                 placeholder="1234"
                 placeholderTextColor="#B3B6B7"
@@ -62,6 +74,7 @@ const Register = () => {
               />
               <Space />
               <TextInput
+                ref={refCardNumber3}
                 style={styles.inputNumbersCard}
                 placeholder="1234"
                 placeholderTextColor="#B3B6B7"
@@ -71,6 +84,7 @@ const Register = () => {
               />
               <Space />
               <TextInput
+                ref={refCardNumber4}
                 style={styles.inputNumbersCard}
                 placeholder="1234"
                 placeholderTextColor="#B3B6B7"
