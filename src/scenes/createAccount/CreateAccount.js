@@ -8,11 +8,14 @@ import {
   Alert,
 } from 'react-native';
 import styled from 'styled-components/native';
-import {OrangeTextNav, ButtonCenter, Label, InputText} from '../atoms';
-import HeaderNotLogged from './HeaderNotLogged';
-import Switch from './Switch';
+import {
+  OrangeTextNav,
+  ButtonCenter,
+  Label,
+  InputText,
+} from '../../components/atoms';
 
-const UserNameLogin = props => {
+const CreateAccount = () => {
   return (
     <KeyboardAvoidingView
       style={{flex: 1}}
@@ -23,14 +26,12 @@ const UserNameLogin = props => {
         showsVerticalScrollIndicator>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <ContainerOutter>
-            <HeaderNotLogged text={props.highlightedText} />
             <Container>
               <Label text={props.inputLabelBoldName} />
               <InputText
                 value={props.username}
                 onInputChange={props.onInputChange}
               />
-              <Switch text={props.textSwitch} />
               <BottomContainter>
                 <ButtonCenter
                   name={props.primaryButtonName}
@@ -47,21 +48,4 @@ const UserNameLogin = props => {
   );
 };
 
-const ContainerOutter = styled.View`
-  flex: 1;
-  justify-content: flex-end;
-`;
-
-const BottomContainter = styled.View`
-  padding-bottom: 10px;
-`;
-
-const Container = styled.View`
-  flex: 1;
-  justify-content: flex-end;
-  font-size: 20px;
-  margin-left: 20px;
-  margin-right: 20px;
-`;
-
-export default UserNameLogin;
+export default CreateAccount;

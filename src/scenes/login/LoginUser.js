@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import {Alert} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
 import UserNameLogin from '../../components/molecules/UserNameLogin';
@@ -9,30 +10,36 @@ import {setStringValue, getStringValue} from '../../storage/asyncStorage';
 const LoginUser = () => {
   const {navigate} = useNavigation();
 
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState();
+
+  // popular username com valor do async storage ao inicializar
+  useEffect(() => {
+    getStringValue('username').then(storedUsername =>
+      // Alert.alert('storedUsername: ', storedUsername),
+      setUsername(storedUsername),
+    );
+  }, []);
 
   const handleForward = () => {
-    // setStringValue('username', username).then(itemValue =>
-    //   Alert.alert(itemValue),
-    // );
-    navigate('PaymentRegister');
+    // Alert.alert('username: ', username);
+    setStringValue('username', username).then(navigate('PaymentRegister'));
+    // navigate('PaymentRegister');
   };
 
   const handleChangeInput = value => {
     setUsername(value);
-    console.log('console: ', value);
   };
 
   return (
     <UserNameLogin
       username={username}
-      onInputChange={handleChangeInput.bind(this, username)}
+      onInputChange={handleChangeInput.bind(username)}
       highlightedText={loginTextConstants.greetings}
       inputLabelBoldName={loginTextConstants.user}
       primaryButtonName={loginTextConstants.forward}
       textSwitch={loginTextConstants.rememberMe}
       orangeTextLink={loginTextConstants.forgotMyUser}
-      onPress={handleForward}
+      onPressForward={handleForward}
     />
   );
 };

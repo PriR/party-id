@@ -1,42 +1,59 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components/native';
 import {SafeAreaView, StyleSheet, TextInput} from 'react-native';
 import Lottie from 'lottie-react-native';
 
 import card from '../../assets/lottie/card.json';
 
+import remoteConfig from '@react-native-firebase/remote-config';
+
 const Register = () => {
-  const handleOnChangeText = (id, value) => {
-    switch (id) {
-      case 'firstBlock': {
-        if (value.length === 4) {
-          refCardNumber2.current.focus();
-        }
-        break;
-      }
-      case 'secondBlock': {
-        if (value.length === 4) {
-          refCardNumber3.current.focus();
-        }
-        break;
-      }
-      case 'thirdBlock': {
-        if (value.length === 4) {
-          refCardNumber4.current.focus();
-        }
-        break;
-      }
-      case 'fourthBlock': {
-        console.log('fourthBlock');
-        break;
-      }
+  const handleOnChangeText = event => {
+    console.log('event: ', event);
+    // const length = value.length;
+    // setCardNumber(value);
+    // console.log(length);
+    // console.log('cardNumber: ', cardNumber);
+    // if (length === 4 || length === 9 || length === 14) {
+    //   setCardNumber(value + ' ');
+    // }
+  };
+
+  
+
+  remoteConfig()
+  .setDefaults({
+    awesome_new_feature: 'disabled',
+  })
+  .then(() => remoteConfig().fetchAndActivate())
+  .then(activated => {
+    if (activated) {
+      console.log('Defaults set, fetched & activated!');
+    } else {
+      console.log('Defaults set, however activation failed.');
+    }
+  });
+
+  const handleKeyPress = ({nativeEvent}) => {
+    // console.log('keyValue: ', nativeEvent.key);
+    console.log(inputCardNumber.current.value);
+    if (nativeEvent.key === 'Backspace') {
+      // this.refs.refOfPreviousInput.focus();
+      doSomething(inputCardNumber)
     }
   };
 
-  const refCardNumber1 = React.useRef();
-  const refCardNumber2 = React.useRef();
-  const refCardNumber3 = React.useRef();
-  const refCardNumber4 = React.useRef();
+  const inputCardNumber = React.useRef();
+
+  useEffect(() => {
+    inputCardNumber.current.click();
+  }, [])
+  
+  return (
+    <TextInput ref={inputCardNumber} />
+  );
+
+  const [cardNumber, setCardNumber] = useState();
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -54,43 +71,14 @@ const Register = () => {
             <Label>Número do cartão</Label>
             <Row>
               <TextInput
-                ref={refCardNumber1}
+                ref={inputCardNumber}
                 style={styles.inputNumbersCard}
-                placeholder="1234"
+                placeholder="1234 1234 1234 1234"
                 placeholderTextColor="#B3B6B7"
-                maxLength={4}
+                maxLength={19}
                 keyboardType="number-pad"
-                onChangeText={value => handleOnChangeText('firstBlock', value)}
-              />
-              <Space />
-              <TextInput
-                ref={refCardNumber2}
-                style={styles.inputNumbersCard}
-                placeholder="1234"
-                placeholderTextColor="#B3B6B7"
-                maxLength={4}
-                keyboardType="number-pad"
-                onChangeText={value => handleOnChangeText('secondBlock', value)}
-              />
-              <Space />
-              <TextInput
-                ref={refCardNumber3}
-                style={styles.inputNumbersCard}
-                placeholder="1234"
-                placeholderTextColor="#B3B6B7"
-                maxLength={4}
-                keyboardType="number-pad"
-                onChangeText={value => handleOnChangeText('thirdBlock', value)}
-              />
-              <Space />
-              <TextInput
-                ref={refCardNumber4}
-                style={styles.inputNumbersCard}
-                placeholder="1234"
-                placeholderTextColor="#B3B6B7"
-                maxLength={4}
-                keyboardType="number-pad"
-                onChangeText={value => handleOnChangeText('fourthBlock', value)}
+                value={cardNumber}
+                onKeyPress={handleKeyPress}
               />
             </Row>
           </CardNumberView>
@@ -160,10 +148,6 @@ const CardDataView = styled.View`
   flex: 1;
   margin-left: 10px;
   margin-top: 10px;
-`;
-
-const Space = styled.View`
-  margin-left: 10px;
 `;
 
 const CardNumberView = styled.View`

@@ -4,10 +4,6 @@ import {useEffect} from 'react-native';
 import PropTypes from 'prop-types';
 
 const InputText = ({username, onInputChange}) => {
-  // useEffect(() => {
-  //   onInputChange(username);
-  // }, []);
-
   return <StyledInput value={username} onChangeText={onInputChange} />;
 };
 

@@ -1,17 +1,26 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import LoginUser from '../scenes/login/LoginUser';
-import PaymentRegister from '../scenes/payment/Register';
-import LoginPassword from '../scenes/login/LoginPassword';
 import {BackButtonIcon} from '../components/atoms/Icons';
+import {LoginUser, PaymentRegister, LoginPassword, FingerPrint, CreateAccount} from '../scenes';
 
 const Stack = createStackNavigator();
 
 export default function Router() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="LoginUser">
+        <Stack.Screen
+          name="FingerPrint"
+          component={FingerPrint}
+          options={{
+            headerTitle: null,
+            headerStyle: {
+              backgroundColor: '#5fcfe0',
+              shadowColor: 'transparent',
+            },
+          }}
+        />
         <Stack.Screen
           name="LoginUser"
           component={LoginUser}
@@ -28,6 +37,17 @@ export default function Router() {
           component={LoginPassword}
           options={{
             headerLeft: props => <BackButtonIcon />,
+            headerTitle: null,
+            headerStyle: {
+              backgroundColor: '#5fcfe0',
+              shadowColor: 'transparent',
+            },
+          }}
+        />
+        <Stack.Screen
+          name="CreateAccount"
+          component={CreateAccount}
+          options={{
             headerTitle: null,
             headerStyle: {
               backgroundColor: '#5fcfe0',
