@@ -1,17 +1,12 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import IconMaterial from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const HeaderNotLogged = () => {
   return (
     <HeaderView>
       <Title>Aqui a sua festa começa</Title>
-      <IconMaterial
-        style={{paddingLeft: 10}}
-        name="party-popper"
-        size={30}
-        color="#513e6f"
-      />
+      <MaterialCommunityIcons name="icon-name" size={20} color="#4F8EF7" />
     </HeaderView>
   );
 };

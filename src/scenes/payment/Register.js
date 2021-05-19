@@ -100,7 +100,7 @@ const Register = () => {
               <Label>Nome</Label>
               <TextInput
                 style={styles.inputText}
-                maxLength={26}
+                maxLength={22}
                 placeholder="Priscila Rodrigues da Silva"
                 placeholderTextColor="#B3B6B7"
                 underlineColorAndroid="rgba(0,0,0,0)"
